@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:04:57 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/04/28 19:50:34 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/05/21 17:13:16 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main( int ac, char **av )
 	if (ac != 2)
 	{
 		std::cout << "Invalid arguments" << std::endl;
+		return 1;
 	}
 
 	BitcoinExchange	btc;
@@ -39,4 +40,6 @@ int	main( int ac, char **av )
 		return 1;
 	}
 	btc.parseInputFile(inputFile);
+
+	return 0;
 }

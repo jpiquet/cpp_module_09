@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:05:52 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/04/28 21:05:36 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/05/21 14:25:51 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ class BitcoinExchange
 	private:
 		std::map<std::string, float>	_dataCsv;
 		std::map<std::string, float>	_inputFile;
-
 };
 
 #endif
