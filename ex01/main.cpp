@@ -5,43 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/28 17:04:57 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/05/26 17:40:05 by jpiquet          ###   ########.fr       */
+/*   Created: 2026/05/26 17:22:55 by jpiquet           #+#    #+#             */
+/*   Updated: 2026/05/26 18:17:54 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <fstream>
-#include <string>
-#include "BitcoinExchange.hpp"
+#include "RPN.hpp"
 
-int	main( int ac, char **av )
+bool	isDigit(char c)
+{
+	if (c > '9' || c < '0')
+		return false;
+	return true;
+}
+
+bool	isOp(char c)
+{
+	if (c == '*' || c == '/' || c == '+' || c == '-')
+		return true;
+	return false;
+}
+
+int main(int ac, char **av)
 {
 	if (ac != 2)
 	{
 		if (ac < 2)
-			std::cerr << "Missing input file" << std::endl;
+			std::cerr << "Missing input" << std::endl;
 		else
 			std::cerr << "Too many arguments" << std::endl;
 		return 1;
 	}
 
-	BitcoinExchange	btc;
+	std::stack<int>	stack;
 
-	std::ifstream	exchangeFile("data.csv");
-	if (!exchangeFile.is_open())
+	std::string	arg(av[1]);
+	for (size_t i = 0; i < arg.size(); ++i)
 	{
-		std::cout << "Error: " << "data.csv" << " can't be open or doesn'exist !" << std::endl;
-		return 1;
+		if (isDigit(arg[i]))
+		{
+			stack.push(arg[i] - '0');
+		}
+		else if (isOp(arg[i]) || stack.size() >= 2)
+		{
+			int n1 = stack.top();
+			stack.pop();
+			int n2 = stack.top();
+		}
+		else
+			std::cerr << "Error" << std::endl;
 	}
-	btc.parseExchangeFile(exchangeFile);
-
-	std::ifstream	inputFile(av[1]);
-	if (!exchangeFile.is_open())
-	{
-		std::cout << "Error: " << av[1] << " can't be open or doesn'exist !" << std::endl;
-		return 1;
-	}
-	btc.parseInputFile(inputFile);
-	return 0;
 }
