@@ -6,29 +6,21 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 17:22:55 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/05/26 18:17:54 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/06/02 12:08:53 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "RPN.hpp"
-
-bool	isDigit(char c)
-{
-	if (c > '9' || c < '0')
-		return false;
-	return true;
-}
-
-bool	isOp(char c)
-{
-	if (c == '*' || c == '/' || c == '+' || c == '-')
-		return true;
-	return false;
-}
 
 int main(int ac, char **av)
 {
+	std::ifstream	infile("test.txt");
+	std::string		buff;
+
+	(void)av;
 	if (ac != 2)
 	{
 		if (ac < 2)
@@ -38,22 +30,19 @@ int main(int ac, char **av)
 		return 1;
 	}
 
-	std::stack<int>	stack;
-
-	std::string	arg(av[1]);
-	for (size_t i = 0; i < arg.size(); ++i)
+	RPN n;
+	try
 	{
-		if (isDigit(arg[i]))
+		while(std::getline(infile, buff, '\n'))
 		{
-			stack.push(arg[i] - '0');
+			n.calculationInput(buff);
+			n.printRes();
 		}
-		else if (isOp(arg[i]) || stack.size() >= 2)
-		{
-			int n1 = stack.top();
-			stack.pop();
-			int n2 = stack.top();
-		}
-		else
-			std::cerr << "Error" << std::endl;
 	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
+	return 0;
 }
