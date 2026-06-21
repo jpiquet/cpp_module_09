@@ -1,6 +1,12 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <vector>
+#include <deque>
+#include <string>
+#include <stdexcept>
+#include <cstdlib>
+
 class PmergeMe
 {
     public:
@@ -10,6 +16,8 @@ class PmergeMe
         ~PmergeMe( void );
 
 	private:
+		std::vector<unsigned int>	vec;
+		std::deque<unsigned int>	deque;
 };
 
 #endif

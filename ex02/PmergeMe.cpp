@@ -7,7 +7,7 @@ PmergeMe::PmergeMe( PmergeMe const & src ) {}
 
 PmergeMe & PmergeMe::operator=( PmergeMe const & rightSide )
 {
-	if (this != &rightSide)
+	// if (this != &rightSide)
 	return *this;
 }
 
