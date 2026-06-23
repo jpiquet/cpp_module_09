@@ -14,9 +14,11 @@ int main(int ac, char** av)
 
 	try
 	{
-		std::vector<unsigned int>	vec = parsing(ac, av);
-		for(std::vector<unsigned int>::iterator it = sort.vec.begin(); it != vec.end(); ++it)
-			std::cout << *it << std::endl;
+		sort.storeData(ac, av);
+		
+		// std::vector<unsigned int>	vec = parsing(ac, av);
+		// for(std::vector<unsigned int>::iterator it = sort.vec.begin(); it != vec.end(); ++it)
+			// std::cout << *it << std::endl;
 	}
 	catch(const std::exception& e)
 	{
@@ -25,23 +27,4 @@ int main(int ac, char** av)
 	}
 
 	return 0;
-}
-
-template <typename T>
-std::vector<unsigned int> parsing(int ac, char** av, T & list)
-{
-	char* 						endptr;
-	long						n;
-
-	for(int i = 1; i < ac; ++i)
-	{
-		n = std::strtol(av[i], &endptr, 10);
-		if (n < 0)
-			throw std::invalid_argument("Error: Can't be a negative number");
-		if (*endptr != '\0')
-			throw std::invalid_argument("Error: Only numbers are allowed");
-		if (n > __INT_MAX__)
-			throw std::invalid_argument("Error: Overflow");
-		list.push_back(static_cast<unsigned int>(n));
-	}
 }

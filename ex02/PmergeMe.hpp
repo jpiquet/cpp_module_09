@@ -15,9 +15,12 @@ class PmergeMe
 		PmergeMe & operator=( PmergeMe const & rightSide );
         ~PmergeMe( void );
 
+		void	storeData(int ac, char** av);
+		void	sortList();
+
 	private:
-		std::vector<unsigned int>	vec;
-		std::deque<unsigned int>	deque;
+		std::vector<unsigned int>	_vec;
+		std::deque<unsigned int>	_deque;
 };
 
 #endif

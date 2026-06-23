@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amerzone <amerzone@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 11:27:09 by amerzone          #+#    #+#             */
-/*   Updated: 2026/06/21 12:02:10 by amerzone         ###   ########.fr       */
+/*   Updated: 2026/06/23 14:26:39 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdexcept>
 #include <cstdlib>
 
-std::vector<unsigned int> parsing(int ac, char** av)
+std::vector<unsigned int> parsing(int ac, char** av, )
 {
 	char* 						endptr;
 	std::vector<unsigned int>	vec;
