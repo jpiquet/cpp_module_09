@@ -9,8 +9,8 @@ INC = inc
 OBJDIR = obj/
 
 SRC =	main.cpp \
+		PmergeMe.cpp
 # 		parsing.cpp
-# 		PmergeMe.cpp \
 
 OBJ := $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 DEPS = $(OBJ:.o=.d)

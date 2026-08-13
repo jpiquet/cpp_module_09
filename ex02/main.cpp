@@ -10,15 +10,15 @@ int main(int ac, char** av)
 
 	PmergeMe	sort;
 	if(ac <= 1)
+	{
+		std::cout << "Need at least one argument" << std::endl;
 		return 1;
+	}
 
 	try
 	{
 		sort.storeData(ac, av);
-		
-		// std::vector<unsigned int>	vec = parsing(ac, av);
-		// for(std::vector<unsigned int>::iterator it = sort.vec.begin(); it != vec.end(); ++it)
-			// std::cout << *it << std::endl;
+		sort.launch();
 	}
 	catch(const std::exception& e)
 	{
