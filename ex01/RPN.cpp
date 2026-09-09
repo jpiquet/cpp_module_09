@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:32:34 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/06/02 12:08:43 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/08/23 11:08:45 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ bool	isOp(char c)
 
 int	doTheMath(int n1, int n2, char op)
 {
-	// std::cout << "n1 = " << n1 << " n2 = " << n2 << " operator = " << op << std::endl;
 	long res = 0;
 	if (op == '*')
 	{
