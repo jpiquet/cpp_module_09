@@ -40,7 +40,8 @@ void	PmergeMe::storeData(int ac, char** av)
 
 void	PmergeMe::launch( void )
 {
-	sortVec(_vec);
+	_vec = sortVec(_vec);
+	printVec();
 }
 
 // typename <template T>
@@ -75,8 +76,6 @@ std::vector<Pair> formPairs( std::vector<unsigned int> list)
 
 	for(i = 0; i < list.size(); i += 2)
 	{
-		if (i + 2 > list.size())
-			break;
 		if (list[i] > list[i + 1])
 		{
 			std::cout << "Winner = " << list[i] << " | Loser = " << list[i + 1] << std::endl;
@@ -93,6 +92,113 @@ std::vector<Pair> formPairs( std::vector<unsigned int> list)
 	}
 	return pairs;
 }
+
+std::vector<Pair> reorderPairs( const std::vector<Pair>& pairs, const std::vector<unsigned int>& sortedWinners)
+{
+	std::vector<Pair> sortedPairs;
+
+	for (size_t i = 0; i < sortedWinners.size(); ++i)
+	{
+		for (size_t j = 0; j < pairs.size(); ++j)
+		{
+			if (sortedWinners[i] == pairs[j].winner)
+			{
+				sortedPairs.push_back(pairs[j]);
+				break;
+			}
+		}
+	}
+	return sortedPairs;
+}
+
+std::vector<size_t> jacobsthalOrder(size_t nPair)
+{
+	std::vector<size_t> order;
+
+	if (nPair <= 1)
+		return order;
+	
+	size_t previous = 1;
+	size_t current = 3;
+
+	while (previous < nPair)
+	{
+		size_t i = current;
+		if (i > nPair)
+			i = nPair;
+		while (i > previous)
+		{
+			order.push_back(i);
+			i--;
+		}
+
+		size_t next = current + 2 * previous;
+		previous = current;
+		current = next;
+	}
+	return order;
+}
+
+// void	placement()
+std::vector<unsigned int> sortVec( std::vector<unsigned int> list)
+{
+	std::vector<Pair>			pairs;
+	std::vector<unsigned int>	winners;
+	std::vector<unsigned int>	mainChain;
+	unsigned int				straggler;
+	bool						hasStraggler = false;
+
+	if (list.size() <= 1)
+		return list;
+
+	if ((list.size() % 2) == 1)
+	{
+		straggler = list.back();
+		hasStraggler = true;
+		list.pop_back();
+	}
+
+	pairs = formPairs(list);
+	for (size_t i = 0; i < pairs.size(); ++i)
+	{
+		winners.push_back(pairs[i].winner);
+	}
+
+	mainChain = sortVec(winners);
+	pairs = reorderPairs(pairs, mainChain);
+
+	if (!pairs.empty())
+		mainChain.insert(mainChain.begin(), pairs[0].loser);
+
+	std::vector<size_t> order = jacobsthalOrder(pairs.size());
+
+	for (size_t i = 0; i < order.size(); ++i)
+	{
+		size_t pairIndex = order[i];
+		std::vector<unsigned int>::iterator boundPos;
+		std::vector<unsigned int>::iterator insertPos;
+
+		unsigned int loser = pairs[pairIndex - 1].loser;
+		unsigned int winner = pairs[pairIndex - 1].winner;
+
+		boundPos = std::find( mainChain.begin(), mainChain.end(), winner);
+
+		insertPos = std::lower_bound(mainChain.begin(), boundPos, loser);
+
+		mainChain.insert(insertPos, loser);
+	}
+
+	if (hasStraggler)
+	{
+	    std::vector<unsigned int>::iterator insertPos;
+
+	    insertPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
+	    mainChain.insert(insertPos, straggler);
+	}
+
+	return mainChain;
+}
+
 
 // size_t	binarySearch(std::vector<unsigned int> mainChain, Pair pair)
 // {
@@ -125,67 +231,3 @@ std::vector<Pair> formPairs( std::vector<unsigned int> list)
 // 			return mid;
 // 	}
 // }
-
-// void	placement()
-std::vector<unsigned int> sortVec( std::vector<unsigned int> list)
-{
-	std::vector<Pair>			pairs;
-	std::vector<unsigned int>	winners;
-	std::vector<unsigned int>	mainChain;
-	std::vector<unsigned int>	straggler;
-	// bool						hasStaggler;
-
-	if (list.size() <= 1)
-		return list;
-
-	if ((list.size() % 2) == 1)
-	{
-		straggler.push_back(list[list.size() - 1]);
-		list.pop_back();
-	}
-
-	pairs = formPairs(list);
-	for (size_t i = 0; i < pairs.size(); ++i)
-	{
-		winners.push_back(pairs[i].winner);
-	}
-
-	mainChain = sortVec(winners);
-	// for(size_t i = 0; i < pairs[i]; ++i)
-
-	for(size_t i = 0; i < pairs.size(); ++i)
-	{
-		std::vector<unsigned int>::iterator bornPos;
-		bornPos = std::find(mainChain.begin(), mainChain.end(), pairs[i].winner);
-		if (bornPos == mainChain.begin())
-		{
-			mainChain.insert(mainChain.begin(), pairs[i].loser);
-		}
-		else
-		{
-			std::vector<unsigned int>::iterator lower = std::lower_bound(mainChain.begin(), bornPos, pairs[i].loser);
-			mainChain.insert(lower, pairs[i].loser);
-		}
-	}
-
-	// for(size_t i = 0; i < mainChain.size(); ++i)
-	// {
-	// 	for(size_t j = 0; j < pairs.size(); ++j)
-	// 	{
-	// 		if (pairs[j].winner == mainChain[i])
-	// 		{
-	// 			mainChain.push_back(pairs[j].loser);
-	// 		}
-	// 	}
-	// }
-
-	// for(size_t i = 0; i < straggler.size(); ++i)
-	// {
-	// 	// std::cout << "mainChain = " << mainChain[i] << std::endl;
-	// 	std::cout << "mainChain = " << straggler[i] << std::endl;
-	// }
-	// std::cout << std::endl;
-	return mainChain;
-}
-
-
