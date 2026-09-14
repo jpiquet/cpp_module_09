@@ -21,8 +21,8 @@ PmergeMe::~PmergeMe( void ) {}
 
 void	PmergeMe::storeVector( int ac, char** av )
 {
-	char* 						endptr;
-	long						n;
+	char* 	endptr;
+	long	n;
 
 	for(int i = 1; i < ac; ++i)
 	{
@@ -39,8 +39,8 @@ void	PmergeMe::storeVector( int ac, char** av )
 
 void	PmergeMe::storeDeque( int ac, char** av )
 {
-	char* 						endptr;
-	long						n;
+	char* 	endptr;
+	long	n;
 
 	for(int i = 1; i < ac; ++i)
 	{
@@ -63,11 +63,11 @@ void	printTime( long long vector, long long deque, size_t nElements )
 
 void	PmergeMe::launch( int ac, char** av )
 {
-	timeval start;
-	timeval end;
+	timeval		start;
+	timeval		end;
 
-	long long vectorTime;
-	long long dequeTime;
+	long long	vectorTime;
+	long long	dequeTime;
 
 	std::cout << "Before: ";
 	printVec();
