@@ -11,10 +11,13 @@
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
 
+std::vector<int> sortVec( std::vector<int> list);
+std::deque<int> sortDeque( std::deque<int> list);
+
 struct Pair
 {
-	unsigned int winner;
-	unsigned int loser;
+	int winner;
+	int loser;
 };
 
 class PmergeMe
@@ -25,17 +28,18 @@ class PmergeMe
 		PmergeMe & operator=( PmergeMe const & rightSide );
         ~PmergeMe( void );
 
-		void	storeData(int ac, char** av);
+		void	storeVector(int ac, char** av);
+		void	storeDeque(int ac, char** av);
 
-		void	launch( void );
+		void	launch( int ac, char** av );
 
 		void	printVec( void ) const;
 		void	printDeque( void ) const;
 
 
 	private:
-		std::vector<unsigned int>	_vec;
-		std::deque<unsigned int>	_deque;
+		std::vector<int>	_vec;
+		std::deque<int>		_deque;
 };
 
 #endif
