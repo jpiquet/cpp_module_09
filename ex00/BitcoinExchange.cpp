@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:05:56 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/05/26 18:24:13 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 11:47:15 by jocelyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-// #include "tools.hpp"
-// #include <iostream>
 
 void	parseDate( std::string date );
 void	parseValue( float value );
@@ -39,10 +37,16 @@ void	BitcoinExchange::parseExchangeFile( std::ifstream & exchangeFile )
 	std::string		strValue;
 
 	float			value;
-	unsigned int	pos;
+	size_t			pos;
+	bool			firstString = false;
 
 	while (std::getline(exchangeFile, buffer))
 	{
+		if (buffer == "date,exchange_rate" && firstString == false)
+		{
+			firstString = true;
+			continue;
+		}
 		pos = buffer.find(',');
 		if (pos == buffer.npos)
 		{
@@ -56,7 +60,6 @@ void	BitcoinExchange::parseExchangeFile( std::ifstream & exchangeFile )
 			value = std::strtof(strValue.c_str(), NULL);
 			if (value < 0)
 				return ;
-			// parseValue(value);
 		}
 		catch(const std::exception& e)
 		{
@@ -75,7 +78,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 
 	float			value;
 	float			exchangeValue;
-	unsigned int	pos;
+	size_t			pos;
 	char			*endptr;
 
 	while (std::getline(inputFile, buffer))
