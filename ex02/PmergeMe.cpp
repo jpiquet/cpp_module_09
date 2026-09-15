@@ -36,6 +36,15 @@ void	PmergeMe::storeData( int ac, char** av )
 		_vec.push_back(static_cast<int>(n));
 		_deque.push_back(static_cast<int>(n));
 	}
+
+	for (size_t i = 0; i < _vec.size(); ++i)
+	{
+		for (size_t j = i + 1; j < _vec.size(); ++j)
+		{
+			if (_vec[i] == _vec[j])
+				throw std::invalid_argument("Duplicate numbers are not allowed");
+		}
+	}
 }
 
 void	printTime( long long vector, long long deque, size_t nElements )
