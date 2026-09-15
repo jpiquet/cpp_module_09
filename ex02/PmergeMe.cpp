@@ -19,7 +19,7 @@ PmergeMe & PmergeMe::operator=( PmergeMe const & rightSide )
 
 PmergeMe::~PmergeMe( void ) {}
 
-void	PmergeMe::storeVector( int ac, char** av )
+void	PmergeMe::storeData( int ac, char** av )
 {
 	char* 	endptr;
 	long	n;
@@ -34,23 +34,6 @@ void	PmergeMe::storeVector( int ac, char** av )
 		if (n > __INT_MAX__ || n < INT_MIN)
 			throw std::invalid_argument("Error: Overflow");
 		_vec.push_back(static_cast<int>(n));
-	}
-}
-
-void	PmergeMe::storeDeque( int ac, char** av )
-{
-	char* 	endptr;
-	long	n;
-
-	for(int i = 1; i < ac; ++i)
-	{
-		n = std::strtol(av[i], &endptr, 10);
-		if (n < 0)
-			throw std::invalid_argument("Error: Can't be a negative number");
-		if (*endptr != '\0')
-			throw std::invalid_argument("Error: Only numbers are allowed");
-		if (n > __INT_MAX__ || n < INT_MIN)
-			throw std::invalid_argument("Error: Overflow");
 		_deque.push_back(static_cast<int>(n));
 	}
 }
@@ -61,7 +44,7 @@ void	printTime( long long vector, long long deque, size_t nElements )
 	std::cout << "Time to process a range of " << nElements << " with std::deque =  " << deque << "us" << std::endl;
 }
 
-void	PmergeMe::launch( int ac, char** av )
+void	PmergeMe::launch( void )
 {
 	timeval		start;
 	timeval		end;
@@ -73,14 +56,12 @@ void	PmergeMe::launch( int ac, char** av )
 	printVec();
 
 	gettimeofday(&start, NULL);
-	storeVector(ac, av);
 	_vec = sortVec(_vec);
 	gettimeofday(&end, NULL);
 
 	vectorTime = (end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec);
 	
 	gettimeofday(&start, NULL);
-	storeDeque(ac, av);
 	_deque = sortDeque(_deque);
 	gettimeofday(&end, NULL);
 
