@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:04:57 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/05/26 17:40:05 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 13:34:28 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,16 @@ int	main( int ac, char **av )
 		std::cout << "Error: " << "data.csv" << " can't be open or doesn'exist !" << std::endl;
 		return 1;
 	}
-	btc.parseExchangeFile(exchangeFile);
-
+	try
+	{
+		btc.parseExchangeFile(exchangeFile);
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << e.what() << '\n';
+		return 1;
+	}
+	
 	std::ifstream	inputFile(av[1]);
 	if (!exchangeFile.is_open())
 	{

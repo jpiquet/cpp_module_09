@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:32:34 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/08/23 11:08:45 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 15:13:34 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	RPN::calculationInput( std::string const& arg)
 			continue;
 		else
 			throw std::invalid_argument("Bad input");
+	}
+	if (_stack.size() > 1)
+	{
+		throw std::invalid_argument("Bad input");
 	}
 }
 

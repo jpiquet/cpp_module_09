@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sortVector.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/15 16:29:27 by jpiquet           #+#    #+#             */
+/*   Updated: 2026/09/15 16:29:28 by jpiquet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 #include <iostream>
 
@@ -73,9 +85,9 @@ std::vector<size_t> jacobsthalOrder(size_t nPair)
 std::vector<int> sortVec( std::vector<int> list)
 {
 	std::vector<Pair>			pairs;
-	std::vector<int>	winners;
-	std::vector<int>	mainChain;
-	int				straggler;
+	std::vector<int>			winners;
+	std::vector<int>			mainChain;
+	int							straggler;
 	bool						hasStraggler = false;
 
 	if (list.size() <= 1)

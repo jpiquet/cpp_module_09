@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/15 16:29:17 by jpiquet           #+#    #+#             */
+/*   Updated: 2026/09/15 16:29:18 by jpiquet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PmergeMe.hpp"
 #include <iostream>
 #include <sys/time.h>
@@ -19,10 +31,11 @@ PmergeMe & PmergeMe::operator=( PmergeMe const & rightSide )
 
 PmergeMe::~PmergeMe( void ) {}
 
-void	PmergeMe::storeData( int ac, char** av )
+std::vector<int>	PmergeMe::storeData( int ac, char** av )
 {
-	char* 	endptr;
-	long	n;
+	std::vector<int>	numbers;
+	char* 				endptr;
+	long				n;
 
 	for(int i = 1; i < ac; ++i)
 	{
@@ -33,27 +46,38 @@ void	PmergeMe::storeData( int ac, char** av )
 			throw std::invalid_argument("Error: Only numbers are allowed");
 		if (n > __INT_MAX__ || n < INT_MIN)
 			throw std::invalid_argument("Error: Overflow");
-		_vec.push_back(static_cast<int>(n));
-		_deque.push_back(static_cast<int>(n));
+		numbers.push_back(n);
 	}
 
-	for (size_t i = 0; i < _vec.size(); ++i)
+	for (size_t i = 0; i < numbers.size(); ++i)
 	{
-		for (size_t j = i + 1; j < _vec.size(); ++j)
+		for (size_t j = i + 1; j < numbers.size(); ++j)
 		{
-			if (_vec[i] == _vec[j])
+			if (numbers[i] == numbers[j])
 				throw std::invalid_argument("Duplicate numbers are not allowed");
 		}
 	}
+	return numbers;
+}
+
+void	printNumbers(std::vector<int> const& numbers)
+{
+	std::vector<int>::const_iterator it;
+
+	for(it = numbers.begin(); it != numbers.end(); it++)
+	{
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
 }
 
 void	printTime( long long vector, long long deque, size_t nElements )
 {
-	std::cout << "Time to process a range of " << nElements << " elements with std::vector = " << vector << "us" << std::endl;
-	std::cout << "Time to process a range of " << nElements << " with std::deque =  " << deque << "us" << std::endl;
+	std::cout << "Time to process a range of " << nElements << " elements with std::vector = " << vector << " us" << std::endl;
+	std::cout << "Time to process a range of " << nElements << " elemets with std::deque =  " << deque << " us" << std::endl;
 }
 
-void	PmergeMe::launch( void )
+void	PmergeMe::launch( std::vector<int> const& numbers )
 {
 	timeval		start;
 	timeval		end;
@@ -62,15 +86,23 @@ void	PmergeMe::launch( void )
 	long long	dequeTime;
 
 	std::cout << "Before: ";
-	printVec();
+	printNumbers(numbers);
 
 	gettimeofday(&start, NULL);
+	for (size_t i = 0; i < numbers.size(); ++i)
+	{
+		_vec.push_back(numbers[i]);
+	}
 	_vec = sortVec(_vec);
 	gettimeofday(&end, NULL);
 
 	vectorTime = (end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec);
-	
+
 	gettimeofday(&start, NULL);
+	for (size_t i = 0; i < numbers.size(); ++i)
+	{
+		_deque.push_back(numbers[i]);
+	}
 	_deque = sortDeque(_deque);
 	gettimeofday(&end, NULL);
 
@@ -103,35 +135,3 @@ void	PmergeMe::printDeque( void ) const
 	}
 	std::cout << std::endl;
 }
-
-// size_t	binarySearch(std::vector<int> mainChain, Pair pair)
-// {
-// 	size_t	bornePos;
-
-// 	for (size_t i = 0; i < mainChain.size(); ++i)
-// 	{
-// 		if (pair.winner == mainChain[i])
-// 		{
-// 			bornePos = i;
-// 		}
-// 	}
-
-// 	size_t low = 0;
-// 	size_t high = bornePos;
-// 	size_t mid;
-	
-// 	if (low == bornePos)
-// 		return low;
-// 	while (low < high)
-// 	{
-// 		mid = low + (high - low) / 2;
-// 		if (mainChain[mid] > pair.loser)
-// 		{
-// 			high = mid;
-// 		}
-// 		else if (mainChain[mid] < pair.loser)
-// 			low = mid + 1;
-// 		else
-// 			return mid;
-// 	}
-// }

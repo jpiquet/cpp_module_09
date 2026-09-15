@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:05:56 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 11:47:15 by jocelyn          ###   ########.fr       */
+/*   Updated: 2026/09/15 15:57:44 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ void	BitcoinExchange::parseExchangeFile( std::ifstream & exchangeFile )
 
 	float			value;
 	size_t			pos;
-	bool			firstString = false;
+	bool			firstString = true;
 
 	while (std::getline(exchangeFile, buffer))
 	{
-		if (buffer == "date,exchange_rate" && firstString == false)
+		if (buffer == "date,exchange_rate" && firstString == true)
 		{
-			firstString = true;
+			firstString = false;
 			continue;
 		}
 		pos = buffer.find(',');
 		if (pos == buffer.npos)
 		{
-			throw std::invalid_argument("Wrong format");
+			throw std::invalid_argument("Wrong csv format");
 		}
 		date = buffer.substr(0, pos);
 		strValue = buffer.substr(pos + 1, buffer.size());
@@ -58,13 +58,17 @@ void	BitcoinExchange::parseExchangeFile( std::ifstream & exchangeFile )
 		{
 			parseDate(date);
 			value = std::strtof(strValue.c_str(), NULL);
+			if (strValue.size() == 0)
+			{
+				std::cout << strValue.size() << std::endl;
+				throw std::invalid_argument("Wrong format");
+			}
 			if (value < 0)
 				return ;
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << buffer << '\n';
-			return ;
+			throw std::invalid_argument("Wrong csv format");
 		}
 		_dataCsv[date] = value;
 	}
@@ -91,7 +95,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 		pos = buffer.find('|');
 		if (pos == buffer.npos)
 		{
-			std::cerr << "Wrong format: " << buffer << std::endl;
+			std::cout << "Wrong format: " << buffer << std::endl;
 			continue ;
 		}
 
@@ -102,7 +106,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << buffer << '\n';
+			std::cout << e.what() << buffer << '\n';
 			continue ;
 		}
 
@@ -110,7 +114,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 		value = std::strtof(strValue.c_str(), &endptr);
 		if (endptr == strValue.c_str() || *endptr != '\0')
 		{
-			std::cerr << "Wrong value: " << buffer << std::endl;
+			std::cout << "Wrong value: " << buffer << std::endl;
 			continue;
 		}
 
@@ -120,10 +124,9 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "Wrong value: " << value << '\n';
+			std::cout << "Wrong value: " << value << '\n';
 			continue;
 		}
-
 		exchangeValue = getExchangeValue(date, value);
 		std::cout << date << " | " << exchangeValue << std::endl;
 	}

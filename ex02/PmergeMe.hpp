@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/15 16:29:21 by jpiquet           #+#    #+#             */
+/*   Updated: 2026/09/15 16:29:22 by jpiquet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
@@ -11,8 +23,9 @@
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
 
-std::vector<int> sortVec( std::vector<int> list);
-std::deque<int> sortDeque( std::deque<int> list);
+std::vector<int>	sortVec( std::vector<int> list);
+std::deque<int>		sortDeque( std::deque<int> list);
+void				printNumbers(std::vector<int> const& numbers);
 
 struct Pair
 {
@@ -28,9 +41,9 @@ class PmergeMe
 		PmergeMe & operator=( PmergeMe const & rightSide );
         ~PmergeMe( void );
 
-		void	storeData( int ac, char **av );
+		std::vector<int>	storeData( int ac, char **av );
 
-		void	launch( void );
+		void	launch( std::vector<int> const& numbers );
 
 		void	printVec( void ) const;
 		void	printDeque( void ) const;

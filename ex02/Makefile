@@ -12,7 +12,6 @@ SRC =	main.cpp \
 		PmergeMe.cpp \
 		sortDeque.cpp \
 		sortVector.cpp
-# 		parsing.cpp
 
 OBJ := $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 DEPS = $(OBJ:.o=.d)
