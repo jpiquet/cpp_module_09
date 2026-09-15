@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:27 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 16:29:28 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 18:52:09 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ std::vector<size_t> jacobsthalOrder(size_t nPair)
 		current = next;
 	}
 	return order;
+}
+
+void printPairs(std::vector<Pair> pairs)
+{
+	for(size_t i=0; i < pairs.size(); ++i)
+	{
+		std::cout << "[" << pairs[i].loser << "," << pairs[i].winner << "], ";
+	}
+	std::cout << "\n";
 }
 
 std::vector<int> sortVec( std::vector<int> list)

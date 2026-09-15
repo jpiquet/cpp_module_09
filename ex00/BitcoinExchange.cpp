@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:05:56 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 15:57:44 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 16:58:24 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 float	BitcoinExchange::getExchangeValue( std::string const& date, float value)
 {
 	std::map<std::string, float>::iterator it = _dataCsv.lower_bound(date);
-	
-	
-	if (it == _dataCsv.begin())
-	{
-		return 0;
-	}
+
 	if (it == _dataCsv.end() || it->first != date)
 	{
 		it--;

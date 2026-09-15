@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:21 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 16:29:22 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 17:57:30 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void				printNumbers(std::vector<int> const& numbers);
 
 struct Pair
 {
+	// std::vector<int> 
 	int winner;
 	int loser;
 };

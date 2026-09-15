@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:04:57 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 13:34:28 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/15 16:53:17 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main( int ac, char **av )
 	}
 	
 	std::ifstream	inputFile(av[1]);
-	if (!exchangeFile.is_open())
+	if (!inputFile.is_open())
 	{
 		std::cout << "Error: " << av[1] << " can't be open or doesn'exist !" << std::endl;
 		return 1;
