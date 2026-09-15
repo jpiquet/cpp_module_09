@@ -28,10 +28,9 @@ class PmergeMe
 		PmergeMe & operator=( PmergeMe const & rightSide );
         ~PmergeMe( void );
 
-		void	storeVector(int ac, char** av);
-		void	storeDeque(int ac, char** av);
+		void	storeData( int ac, char **av );
 
-		void	launch( int ac, char** av );
+		void	launch( void );
 
 		void	printVec( void ) const;
 		void	printDeque( void ) const;

@@ -15,7 +15,8 @@ int main(int ac, char** av)
 
 	try
 	{
-		sort.launch(ac, av);
+		sort.storeData(ac, av);
+		sort.launch();
 	}
 	catch(const std::exception& e)
 	{
