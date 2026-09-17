@@ -1,0 +1,2 @@
+Corriger le ex00 quand la date est anterieur à la premiere date de la database.
+Corriger le ex02, autoriser les duplicates numbers.
