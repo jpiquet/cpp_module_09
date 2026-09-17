@@ -6,14 +6,12 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:17 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 16:29:18 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/16 16:07:12 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <iostream>
-#include <sys/time.h>
-
 
 PmergeMe::PmergeMe( void ) : _vec(), _deque() {}
 
@@ -44,7 +42,7 @@ std::vector<int>	PmergeMe::storeData( int ac, char** av )
 			throw std::invalid_argument("Error: Can't be a negative number");
 		if (*endptr != '\0')
 			throw std::invalid_argument("Error: Only numbers are allowed");
-		if (n > __INT_MAX__ || n < INT_MIN)
+		if (n > __INT_MAX__|| n < INT_MIN)
 			throw std::invalid_argument("Error: Overflow");
 		numbers.push_back(n);
 	}

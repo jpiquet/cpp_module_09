@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/26 17:22:55 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 15:00:08 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/16 15:47:56 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int ac, char **av)
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
+		return 1;
 	}
 	
 	return 0;

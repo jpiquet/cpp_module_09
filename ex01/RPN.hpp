@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:32:44 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/06/02 11:51:54 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/16 15:47:35 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define RPN_HPP
 
 #include <stack>
-
+#include <string>
 #include <climits>
 #include <stdexcept>
 #include <exception>

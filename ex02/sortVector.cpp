@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:27 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 18:52:09 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/17 13:30:30 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ std::vector<size_t> jacobsthalOrder(size_t nPair)
 
 void printPairs(std::vector<Pair> pairs)
 {
-	for(size_t i=0; i < pairs.size(); ++i)
+	for(size_t i = 0; i < pairs.size(); ++i)
 	{
 		std::cout << "[" << pairs[i].loser << "," << pairs[i].winner << "], ";
 	}
@@ -117,7 +117,7 @@ std::vector<int> sortVec( std::vector<int> list)
 
 	mainChain = sortVec(winners);
 	pairs = reorderPairs(pairs, mainChain);
-
+	
 	if (!pairs.empty())
 		mainChain.insert(mainChain.begin(), pairs[0].loser);
 

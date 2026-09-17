@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:04:57 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 16:53:17 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/16 15:49:51 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main( int ac, char **av )
 		std::cout << e.what() << '\n';
 		return 1;
 	}
-	
+
 	std::ifstream	inputFile(av[1]);
 	if (!inputFile.is_open())
 	{

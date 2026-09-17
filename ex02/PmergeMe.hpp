@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:21 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 17:57:30 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/16 16:07:16 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <algorithm>
-
-#define INT_MAX 2147483647
-#define INT_MIN -2147483648
+#include <climits>
+#include <sys/time.h>
 
 std::vector<int>	sortVec( std::vector<int> list);
 std::deque<int>		sortDeque( std::deque<int> list);
@@ -29,7 +28,6 @@ void				printNumbers(std::vector<int> const& numbers);
 
 struct Pair
 {
-	// std::vector<int> 
 	int winner;
 	int loser;
 };
