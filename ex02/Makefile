@@ -9,9 +9,9 @@ INC = inc
 OBJDIR = obj/
 
 SRC =	main.cpp \
-		PmergeMe.cpp \
-		sortDeque.cpp \
-		sortVector.cpp
+		PmergeMe_copy.cpp \
+		sortVector_copy.cpp \
+		sortDeque.cpp 
 
 OBJ := $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 DEPS = $(OBJ:.o=.d)

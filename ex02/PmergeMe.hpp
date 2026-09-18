@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:21 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/16 16:07:16 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/18 11:20:48 by jocelyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <climits>
 #include <sys/time.h>
 
-std::vector<int>	sortVec( std::vector<int> list);
+std::vector<std::vector<int> >	sortVec( std::vector<std::vector<int> > list);
 std::deque<int>		sortDeque( std::deque<int> list);
 void				printNumbers(std::vector<int> const& numbers);
 
@@ -34,11 +34,11 @@ struct Pair
 
 class PmergeMe
 {
-    public:
-        PmergeMe( void );
+	public:
+		PmergeMe( void );
 		PmergeMe( PmergeMe const & src );
 		PmergeMe & operator=( PmergeMe const & rightSide );
-        ~PmergeMe( void );
+		~PmergeMe( void );
 
 		std::vector<int>	storeData( int ac, char **av );
 
@@ -49,7 +49,7 @@ class PmergeMe
 
 
 	private:
-		std::vector<int>	_vec;
+		std::vector<std::vector<int> >	_vec;
 		std::deque<int>		_deque;
 };
 
