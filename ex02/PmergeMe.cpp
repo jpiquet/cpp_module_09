@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:17 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/16 16:07:12 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/18 14:34:48 by jocelyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ std::vector<int>	PmergeMe::storeData( int ac, char** av )
 			throw std::invalid_argument("Error: Overflow");
 		numbers.push_back(n);
 	}
-
-	for (size_t i = 0; i < numbers.size(); ++i)
-	{
-		for (size_t j = i + 1; j < numbers.size(); ++j)
-		{
-			if (numbers[i] == numbers[j])
-				throw std::invalid_argument("Duplicate numbers are not allowed");
-		}
-	}
 	return numbers;
 }
 
@@ -75,6 +66,22 @@ void	printTime( long long vector, long long deque, size_t nElements )
 	std::cout << "Time to process a range of " << nElements << " elemets with std::deque =  " << deque << " us" << std::endl;
 }
 
+std::vector<int> pushVecNumber(int number)
+{
+	std::vector<int> vecNumber;
+	vecNumber.push_back(number);
+
+	return vecNumber;
+}
+
+std::deque<int> pushDequeNumber(int number)
+{
+	std::deque<int> dequeNumber;
+	dequeNumber.push_back(number);
+
+	return dequeNumber;
+}
+
 void	PmergeMe::launch( std::vector<int> const& numbers )
 {
 	timeval		start;
@@ -89,7 +96,7 @@ void	PmergeMe::launch( std::vector<int> const& numbers )
 	gettimeofday(&start, NULL);
 	for (size_t i = 0; i < numbers.size(); ++i)
 	{
-		_vec.push_back(numbers[i]);
+		_vec.push_back(pushVecNumber(numbers[i]));
 	}
 	_vec = sortVec(_vec);
 	gettimeofday(&end, NULL);
@@ -99,7 +106,7 @@ void	PmergeMe::launch( std::vector<int> const& numbers )
 	gettimeofday(&start, NULL);
 	for (size_t i = 0; i < numbers.size(); ++i)
 	{
-		_deque.push_back(numbers[i]);
+		_deque.push_back(pushDequeNumber(numbers[i]));
 	}
 	_deque = sortDeque(_deque);
 	gettimeofday(&end, NULL);
@@ -114,22 +121,18 @@ void	PmergeMe::launch( std::vector<int> const& numbers )
 
 void	PmergeMe::printVec( void ) const
 {
-	std::vector<int>::const_iterator it;
-
-	for(it = _vec.begin(); it != _vec.end(); it++)
+	for (size_t i = 0; i < _vec.size(); ++i)
 	{
-		std::cout << *it << " ";
+		std::cout << _vec[i][0] << " ";
 	}
 	std::cout << std::endl;
 }
 
 void	PmergeMe::printDeque( void ) const
 {
-	std::deque<int>::const_iterator it;
-
-	for(it = _deque.begin(); it != _deque.end(); it++)
+	for (size_t i = 0; i < _deque.size(); ++i)
 	{
-		std::cout << *it << " ";
+		std::cout << _deque[i][0] << " ";
 	}
 	std::cout << std::endl;
 }

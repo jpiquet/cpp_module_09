@@ -6,7 +6,7 @@
 /*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:21 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/18 11:20:48 by jocelyn          ###   ########.fr       */
+/*   Updated: 2026/09/18 14:35:04 by jocelyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,8 @@
 #include <sys/time.h>
 
 std::vector<std::vector<int> >	sortVec( std::vector<std::vector<int> > list);
-std::deque<int>		sortDeque( std::deque<int> list);
-void				printNumbers(std::vector<int> const& numbers);
-
-struct Pair
-{
-	int winner;
-	int loser;
-};
+std::deque<std::deque<int> >	sortDeque( std::deque<std::deque<int> > list);
+void							printNumbers(std::vector<int> const& numbers);
 
 class PmergeMe
 {
@@ -50,7 +44,7 @@ class PmergeMe
 
 	private:
 		std::vector<std::vector<int> >	_vec;
-		std::deque<int>		_deque;
+		std::deque<std::deque<int> >	_deque;
 };
 
 #endif

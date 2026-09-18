@@ -3,55 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   sortDeque.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/15 16:29:24 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/15 16:29:25 by jpiquet          ###   ########.fr       */
+/*   Created: 2026/09/18 14:33:36 by jocelyn           #+#    #+#             */
+/*   Updated: 2026/09/18 14:40:52 by jocelyn          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <iostream>
 
-std::deque<Pair> formPairs( std::deque<int> list)
+std::deque<int>	pushWinLose(std::deque<int> winner, std::deque<int> loser)
 {
-	std::deque<Pair>	pairs;
-	Pair				onePair;
+	std::deque<int>	res;
+
+	for(size_t i = 0; i < winner.size(); ++i)
+	{
+		res.push_back(winner[i]);
+	}
+	for(size_t i = 0; i < loser.size(); ++i)
+	{
+		res.push_back(loser[i]);
+	}
+	return res;
+}
+
+std::deque<std::deque<int> > formPairs( std::deque<std::deque<int> > list)
+{
+	std::deque<std::deque<int> > pairs;
 	size_t				i;
 
 	for(i = 0; i < list.size(); i += 2)
 	{
-		if (list[i] > list[i + 1])
+		if (list[i][0] > list[i + 1][0])
 		{
-			onePair.winner = list[i];
-			onePair.loser = list[i + 1];
+			pairs.push_back(pushWinLose(list[i], list[i + 1]));
 		}
 		else
 		{
-			onePair.winner = list[i + 1];
-			onePair.loser = list[i];
+			pairs.push_back(pushWinLose(list[i + 1], list[i]));
 		}
-		pairs.push_back(onePair);
 	}
 	return pairs;
-}
-
-std::deque<Pair> reorderPairs( const std::deque<Pair>& pairs, const std::deque<int>& sortedWinners)
-{
-	std::deque<Pair> sortedPairs;
-
-	for (size_t i = 0; i < sortedWinners.size(); ++i)
-	{
-		for (size_t j = 0; j < pairs.size(); ++j)
-		{
-			if (sortedWinners[i] == pairs[j].winner)
-			{
-				sortedPairs.push_back(pairs[j]);
-				break;
-			}
-		}
-	}
-	return sortedPairs;
 }
 
 std::deque<size_t> jacobsthalOrderDeque(size_t nPair)
@@ -82,13 +75,52 @@ std::deque<size_t> jacobsthalOrderDeque(size_t nPair)
 	return order;
 }
 
-std::deque<int> sortDeque( std::deque<int> list)
+void printPairs(std::deque<std::deque<int> > pairs)
 {
-	std::deque<Pair>			pairs;
-	std::deque<int>	winners;
-	std::deque<int>	mainChain;
-	int				straggler;
-	bool						hasStraggler = false;
+	for(size_t i = 0; i < pairs.size(); ++i)
+	{
+		std::cout << "[ ";
+		for (size_t j = 0; j < pairs[i].size(); ++j)
+		{
+			std::cout <<  pairs[i][j] << ", ";
+		}
+		std::cout << "], ";
+	}
+	std::cout << "\n";
+}
+
+std::deque<int>	pushLoser(std::deque<int> all)
+{
+	std::deque<int>	res;
+	size_t				i = all.size() / 2;
+
+	while (i < all.size())
+	{
+		res.push_back(all[i]);
+		++i;
+	}
+	return res;
+}
+
+std::deque<int>	pushWin(std::deque<int> all)
+{
+	std::deque<int>	res;
+	size_t				i = 0;
+
+	while (i < (all.size() / 2))
+	{
+		res.push_back(all[i]);
+		++i;
+	}
+	return res;
+}
+
+std::deque<std::deque<int> > sortDeque( std::deque<std::deque<int> > list)
+{
+	std::deque<std::deque<int> >	pairs;
+	std::deque<std::deque<int> >	mainChain;
+	std::deque<int>					straggler;
+	bool							hasStraggler = false;
 
 	if (list.size() <= 1)
 		return list;
@@ -101,40 +133,41 @@ std::deque<int> sortDeque( std::deque<int> list)
 	}
 
 	pairs = formPairs(list);
-	for (size_t i = 0; i < pairs.size(); ++i)
-	{
-		winners.push_back(pairs[i].winner);
-	}
-
-	mainChain = sortDeque(winners);
-	pairs = reorderPairs(pairs, mainChain);
+	pairs = sortDeque(pairs);
 
 	if (!pairs.empty())
-		mainChain.insert(mainChain.begin(), pairs[0].loser);
+	{
+		for (size_t i = 0; i < pairs.size(); ++i)
+		{
+			mainChain.push_back(pushWin(pairs[i]));
+		}
+		mainChain.insert(mainChain.begin(), pushLoser(pairs[0]));
+	}
 
 	std::deque<size_t> order = jacobsthalOrderDeque(pairs.size());
 
 	for (size_t i = 0; i < order.size(); ++i)
 	{
 		size_t pairIndex = order[i];
-		std::deque<int>::iterator boundPos;
-		std::deque<int>::iterator insertPos;
+		std::deque<std::deque<int> >::iterator boundPos;
+		std::deque<std::deque<int> >::iterator insertPos;
 
-		int loser = pairs[pairIndex - 1].loser;
-		int winner = pairs[pairIndex - 1].winner;
-
+		std::deque<int> loser = pushLoser(pairs[pairIndex - 1]);
+		std::deque<int> winner = pushWin(pairs[pairIndex - 1]);
+		
 		boundPos = std::find(mainChain.begin(), mainChain.end(), winner);
 		insertPos = std::lower_bound(mainChain.begin(), boundPos, loser);
 		mainChain.insert(insertPos, loser);
 	}
 
+
 	if (hasStraggler)
 	{
-		std::deque<int>::iterator insertPos;
+		std::deque<std::deque<int> >::iterator	insertPos;
 
 		insertPos = std::lower_bound(mainChain.begin(), mainChain.end(), straggler);
 		mainChain.insert(insertPos, straggler);
 	}
-
 	return mainChain;
 }
+

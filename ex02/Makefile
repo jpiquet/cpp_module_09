@@ -9,8 +9,8 @@ INC = inc
 OBJDIR = obj/
 
 SRC =	main.cpp \
-		PmergeMe_copy.cpp \
-		sortVector_copy.cpp \
+		PmergeMe.cpp \
+		sortVector.cpp \
 		sortDeque.cpp 
 
 OBJ := $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
