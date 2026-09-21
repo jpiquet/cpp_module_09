@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:17 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/18 14:34:48 by jocelyn          ###   ########.fr       */
+/*   Updated: 2026/09/21 11:26:59 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ std::vector<int>	PmergeMe::storeData( int ac, char** av )
 
 	for(int i = 1; i < ac; ++i)
 	{
+		if (av[i][0] == '\0')
+			throw std::invalid_argument("Can't be empty");
 		n = std::strtol(av[i], &endptr, 10);
 		if (n < 0)
 			throw std::invalid_argument("Error: Can't be a negative number");
@@ -63,7 +65,7 @@ void	printNumbers(std::vector<int> const& numbers)
 void	printTime( long long vector, long long deque, size_t nElements )
 {
 	std::cout << "Time to process a range of " << nElements << " elements with std::vector = " << vector << " us" << std::endl;
-	std::cout << "Time to process a range of " << nElements << " elemets with std::deque =  " << deque << " us" << std::endl;
+	std::cout << "Time to process a range of " << nElements << " elements with std::deque =  " << deque << " us" << std::endl;
 }
 
 std::vector<int> pushVecNumber(int number)

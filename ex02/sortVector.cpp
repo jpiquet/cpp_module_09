@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sortVector.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocelyn <jocelyn@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/15 16:29:27 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/18 14:41:04 by jocelyn          ###   ########.fr       */
+/*   Updated: 2026/09/21 11:08:26 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ std::vector<std::vector<int> > sortVec( std::vector<std::vector<int> > list)
 		insertPos = std::lower_bound(mainChain.begin(), boundPos, loser);
 		mainChain.insert(insertPos, loser);
 	}
-
 
 	if (hasStraggler)
 	{
