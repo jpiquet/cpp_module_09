@@ -6,7 +6,7 @@
 /*   By: jpiquet <jpiquet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 17:05:56 by jpiquet           #+#    #+#             */
-/*   Updated: 2026/09/21 17:13:21 by jpiquet          ###   ########.fr       */
+/*   Updated: 2026/09/22 14:43:06 by jpiquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	BitcoinExchange::parseInputFile( std::ifstream & inputFile )
 		}
 		catch(const std::exception& e)
 		{
-			std::cout << "Wrong value: " << value << '\n';
+			std::cout << e.what() << value << '\n';
 			continue;
 		}
 		exchangeValue = getExchangeValue(date, value);
